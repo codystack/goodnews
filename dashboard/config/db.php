@@ -12,11 +12,11 @@ if ($WEBSITE_ENVIRONMENT == "Development") {
     error_reporting(E_ALL ^ E_NOTICE); // turn ON showing errors
 } else {
     $host = "localhost";
-    $user = "webiirem_gdis";
+    $user = "webiirem_goodnews";
     $password = "Webify2020!!";
-    $database = "webiirem_gdis";
+    $database = "webiirem_goodnews";
     define("APP_ENVIRONMENT", "Production");
-    define("APP_BASE_URL", "https://www.gdisagency.com");
+    define("APP_BASE_URL", "https://www.goodnews.estate");
     #error_reporting(0); // turn OFF showing errors
     error_reporting(E_ALL ^ E_NOTICE); // turn ON showing errors
 }
