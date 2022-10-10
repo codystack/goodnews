@@ -1,21 +1,22 @@
 <?php
-//Connect email sending
+// //Connect email sending
 // require_once "../auth/emails/sendmail.php";
-// require_once "../auth/emails/startupmail.php";
 
 session_start();
-// Connect database
+
+//Connect database
 include "./config/db.php";
 
 
-// User registration script
+//User registration script
 if (isset($_POST['register_btn'])) {
 
     $firstName = $conn->real_escape_string($_POST['firstName']);
     $lastName = $conn->real_escape_string($_POST['lastName']);
     $email = $conn->real_escape_string($_POST['email']);
     $password = $conn->real_escape_string($_POST['password']);
-    $securityKey = 'ISC'.rand(1000, 9999);
+    $phone = $conn->real_escape_string($_POST['phone']);
+    $securityKey = 'GE'.rand(1000, 9999);
     $token = bin2hex(random_bytes(50)); // generate unique token
 
     $check_user_query = "SELECT * FROM users WHERE email='$email'";
@@ -23,10 +24,10 @@ if (isset($_POST['register_btn'])) {
     if (mysqli_num_rows($result) > 0) {
         $_SESSION['error_message'] = "User Already Exist!";
     }else {
-        // Finally, register user if there are no errors in the form
+        // Finally, register agent if there are no errors in the form
         $password = sha1($password);//encrypt the password before saving in the database
-        $query = "INSERT INTO users (firstName, lastName, email, password, securityKey, accountType, token, status) 
-  			        VALUES('$firstName', '$lastName', '$email', '$password', '$securityKey', 'Tenant', '$token', 'Active')";
+        $query = "INSERT INTO users (firstName, lastName, email, password, securityKey, phone, token, status) 
+  			        VALUES('$firstName', '$lastName', '$email', '$password', '$securityKey', '$phone', '$token', 'Active')";
         mysqli_query($conn, $query);
         if (mysqli_affected_rows($conn) > 0) {
             // sendVerificationEmail($email, $token, $firstName, $companyName);
@@ -35,17 +36,17 @@ if (isset($_POST['register_btn'])) {
             $_SESSION['email'] = $email;
             $_SESSION['verified'] = false;
             $_SESSION['firstName'] = $firstName;
-            header('location: kyc');
+            $_SESSION['success_message'] = "Account created...you're being redirected.";
+            header('location: joined-tribe');
         }else {
-            $_SESSION['message_title']  = "Registration Error";
-            $_SESSION['message']    = "Error occured: ".mysqli_error($conn);
+            $_SESSION['error_message']    = "Error creating account contact admin";
         }
     }
 }
 
 
 
-// Login script
+//Login script
 if (isset($_POST['login_btn'])) {
 
     $password = $conn->real_escape_string($_POST['password']);
@@ -53,7 +54,9 @@ if (isset($_POST['login_btn'])) {
     $lastName = $conn->real_escape_string($_POST['lastName']);
     $email = $conn->real_escape_string($_POST['email']);
     $status = $conn->real_escape_string($_POST['status']);
+    $verified = $conn->real_escape_string($_POST['verified']);
     $phone = $conn->real_escape_string($_POST['phone']);
+    $securityKey = $conn->real_escape_string($_POST['securityKey']);
 
     $password = sha1($password);
     $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
@@ -64,24 +67,97 @@ if (isset($_POST['login_btn'])) {
         $email = $row['email'];
         $id = $row['id'];
         $status = $row['status'];
+        $verified = $row['verified'];
         $picture = $row['picture'];
         $phone = $row['phone'];
+        $homeAddress = $row['homeAddress'];
+        $securityKey = $row['securityKey'];
     }if (mysqli_num_rows($result) == 1) {
         $_SESSION['firstName'] = $firstName;
         $_SESSION['lastName'] = $lastName;
         $_SESSION['picture'] = $picture;
         $_SESSION['email'] = $email;
         $_SESSION['phone'] = $phone;
+        $_SESSION['homeAddress'] = $homeAddress;
         $_SESSION['id'] = $id;
-        if ($status == 'Inactive'){
-            $_SESSION['error_message'] = "Account Deactivated";
-            echo "<meta http-equiv='refresh' content='3; URL=./'>";
-        }if ($status == 'Active') {
-            $_SESSION['success_message'] = "Login Successful, you're been redirected...";
-            header('location: dashboard');
+        $_SESSION['securityKey'] = $securityKey;
+        if ($verified == 0){
+            $_SESSION['success_message'] = "Login Successfull";
+            header('location: kyc');
         }
+    }elseif ($status == 'Inactive'){
+        $_SESSION['error_message'] = "Account Deactivated";
+        echo "<meta http-equiv='refresh' content='5; URL=./'>";
+    }elseif ($status == 'Active') {
+        header('location: dashboard');
     }else {
-        $_SESSION['error_message'] = "Incorrect Login Details".mysqli_error($conn);
-        echo "<meta http-equiv='refresh' content='3; URL=./'>";
+        $_SESSION['error_message'] = "Incorrect Login Details";
+        echo "<meta http-equiv='refresh' content='5; URL=./'>";
+    }
+}
+
+
+
+
+//KYC script
+if(isset($_POST['kyc_btn'])) {
+
+    $homeAddress = $conn->real_escape_string($_POST['homeAddress']);
+    $flatNumber = $conn->real_escape_string($_POST['flatNumber']);
+    $nextOfKin = $conn->real_escape_string($_POST['nextOfKin']);
+    $nextOfKinPhone = $conn->real_escape_string($_POST['nextOfKinPhone']);
+    $accountType = $conn->real_escape_string($_POST['accountType']);
+
+    $id = $_SESSION['id'];
+    $sql=mysqli_query($conn,"SELECT * FROM users where id='".$_SESSION['id']."'");
+    $result=mysqli_fetch_array($sql);
+    if($result>0)
+    {
+        $conn=mysqli_query($conn,"UPDATE users SET homeAddress='$homeAddress', flatNumber='$flatNumber', nextOfKin='$nextOfKin', nextOfKinPhone='$nextOfKinPhone', accountType='$accountType' where id='".$_SESSION['id']."'");
+        $_SESSION['success_message'] = "Registration Completed 👍";
+        header('location: kyc-photograph');
+    }
+    else
+    {
+        $_SESSION['error_message'] = "Error updating profile.";
+    }
+}
+
+
+
+
+//Upload Profile Picture
+if (isset($_POST['picture_btn'])) {
+
+    $id = $_SESSION['id'];
+    $id = $conn->real_escape_string($_POST['id']);
+    $picture_path  = $conn->real_escape_string('./upload/'.$_FILES['picture']['name']);
+
+    if (file_exists($picture_path)){
+        $picture_path = $conn->real_escape_string('./upload/'.uniqid().rand().$_FILES['picture']['name']);
+    }
+
+    $checker = 0;
+
+    //make sure file type is image
+    if (preg_match("!image!", $_FILES['picture']['type'])) {
+        $checker ++;
+    }
+    if ($checker < 1){
+        exit;
+    }
+
+    $sql=mysqli_query($conn,"SELECT * FROM users where id='".$_SESSION['id']."'");
+    $num=mysqli_fetch_array($sql);
+    if($num>0){
+        $conn=mysqli_query($conn,"UPDATE users SET picture='$picture_path'  where id='".$_SESSION['id']."'");
+
+        //copy image to upload folder
+        copy($_FILES['picture']['tmp_name'], $picture_path);
+
+        $_SESSION['success_message'] = "Picture uploaded 👍";
+    }
+    else{
+        $_SESSION['error_message'] = "Error uploading photograph.";
     }
 }

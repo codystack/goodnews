@@ -1,113 +1,101 @@
 <?php
-include "./auth/account.php";
+    require_once "./auth/account.php";
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThankGod Okoro"/>
+    <link rel="shortcut icon" href="assets/images/gefavicon.png" type="image/x-icon">
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="ThankGod Okoro">
-
-    <link rel="icon" href="assets/images/gefavicon.png" type="image/png" /> 
-
-    <link rel="stylesheet" href="assets/css/lib.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/font/stylesheet.css" />
-
-    <title>Goodnews Estate Portal :: Login</title>
+    <link href="assets/fonts/feather/feather.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <title>Login | Goodnews Community Estate&trade;</title>
 </head>
 
-<body>
+<body style="background: url('assets/images/dashbg.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
 
-    <section class="bg-black overflow-hidden">
-        <div class="py-8 py-xl-10 d-flex flex-column container level-3 min-vh-100">
-            <div class="row align-items-center justify-content-center my-auto">
-                <div class="col-md-10 col-lg-8 col-xl-5">
-                    <div class="text-center mb-3">
-                        <a href="./">
-                            <img src="assets/images/gelogowhite.png" width="300" alt="Logo">
-                        </a>
-                    </div>
-                    <div class="card">
-                        <div class="card-header bg-white text-center pb-0">
-                            <h5 class="fs-4 mb-1">Sign In</h5>
-                            <p>Login using the correct credentials</p>
+
+    <div class="container d-flex flex-column">
+        <div class="row align-items-center justify-content-center g-0 min-vh-100">
+            <div class="col-lg-5 col-md-8 py-8 py-xl-0">
+                <!-- Card -->
+                <div class="card shadow ">
+                    <!-- Card body -->
+                    <div class="card-body p-6">
+                        <div class="mb-4 text-center">
+                            <a href="../">
+                                <img src="assets/images/gelogodark.png" class="mb-4" alt="" width="250">
+                            </a>
+                            <h2 class="mb-1 fw-bold">Welcome back!</h2>
+                            <span>Sign in using correct credentials.</span>
                         </div>
-                        <div class="card-body bg-white">
-                            <?php
-                                if (isset($_SESSION['error_message'])) {
-                                    ?>
-                                    <div class="alert alert-danger" role="alert">
-                                        <div class="alert-message text-center">
-                                            <?php
-                                            echo $_SESSION['error_message'];
-                                            session_destroy();
-                                            ?>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    unset($_SESSION['error_message']);
-                                }
+                        <?php
+                        if (isset($_SESSION['error_message'])) {
                             ?>
-                            <?php
-                                if (isset($_SESSION['success_message'])) {
-                                    ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <div class="alert-message text-center">
-                                            <?php echo $_SESSION['success_message']; ?>
-                                        </div>
-                                    </div>
+                            <div class="alert alert-danger" role="alert">
+                                <div class="alert-message text-center">
                                     <?php
-                                    unset($_SESSION['success_message']);
-                                }
+                                    echo $_SESSION['error_message'];
+                                    session_destroy();
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+                            unset($_SESSION['error_message']);
+                        }
+                        ?>
+                        <?php
+                        if (isset($_SESSION['success_message'])) {
                             ?>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                                <div class="form-floating mb-2">
-                                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
-                                    <label for="floatingInput">Email address</label>
+                            <div class="alert alert-success" role="alert">
+                                <div class="alert-message text-center">
+                                    <?php echo $_SESSION['success_message']; ?>
                                 </div>
-                                <div class="form-floating mb-2">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
+                            </div>
+                            <?php
+                            unset($_SESSION['success_message']);
+                        }
+                        ?>
+                        <!-- Form -->
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" autocomplete="off">
+                            <div class="form-floating mb-4">
+                                <input type="email" id="email" class="form-control" name="email" placeholder="example@gmail.com" required>
+                                <label for="email" class="form-label">Email</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="**************" required>
+                                <label for="password" class="form-label">Password</label>
+                            </div>
+                            <div class="d-lg-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberme">
+                                    <label class="form-check-label " for="rememberme">Remember me</label>
                                 </div>
-                                <div class="d-grid mb-2">
-                                    <button type="submit" name="login_btn" class="btn btn-lg btn-black">Sign In</button>
+                                <div>
+                                    <a href="password-reset">Forgot your password?</a>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                            <label class="form-check-label small text-secondary" for="defaultCheck1">
-                                                Remember me
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col text-end text-black">
-                                        <a href="forgot-password" class="underline small">Forgot password?</a>
-                                    </div>
+                            </div>
+                            <div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-dark" name="login_btn">Sign in</button>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="card-footer bg-opaque-black inverted text-center">
-                            <p class="text-secondary">Don't have an account yet? <a href="register"
-                                class="underline">Register</a>
-                            </p>
-                        </div>
+                            </div>
+                            <div class="text-center mt-3">Don't have an account yet? <a href="register">Sign up</a></div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <figure class="background background-overlay" style="background-image: url('https://i.imgur.com/ttUNFYO.jpg'); background-attachment: fixed;">
-        </figure>
-    </section>
+    </div>
 
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/index.js"></script>
-
+    <script src="assets/js/theme.min.js"></script>
 </body>
 
 </html>

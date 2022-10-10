@@ -1,108 +1,104 @@
 <?php
-include "./auth/account.php";
+    require_once "./auth/account.php";
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="ThankGod Okoro"/>
+    <link rel="shortcut icon" href="assets/images/gefavicon.png" type="image/x-icon">
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="ThankGod Okoro">
-
-    <link rel="icon" href="assets/images/gefavicon.png" type="image/png" /> 
-
-    <link rel="stylesheet" href="assets/css/lib.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/font/stylesheet.css" />
-
-    <title>Goodnews Estate Portal :: Register</title>
+    <link href="assets/fonts/feather/feather.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <title>Register | Goodnews Community Estate&trade;</title>
 </head>
 
-<body>
+<body style="background: url('assets/images/dashbg.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
 
-    <section class="bg-black overflow-hidden">
-        <div class="py-8 py-xl-10 d-flex flex-column container level-3 min-vh-100">
-            <div class="row align-items-center justify-content-center my-auto">
-                <div class="col-md-10 col-lg-8 col-xl-5">
-                    <div class="text-center mb-3">
-                        <a href="./">
-                            <img src="assets/images/gelogowhite.png" width="300" alt="Logo">
-                        </a>
-                    </div>
-                    <div class="card">
-                        <div class="card-header bg-white text-center pb-0">
-                            <h5 class="fs-4 mb-1">Create Account</h5>
-                            <p>Create account using the correct credentials</p>
+
+    <div class="container d-flex flex-column">
+        <div class="row align-items-center justify-content-center g-0 min-vh-100">
+            <div class="col-lg-5 col-md-8 py-8 py-xl-0">
+                <!-- Card -->
+                <div class="card shadow ">
+                    <!-- Card body -->
+                    <div class="card-body p-6">
+                        <div class="mb-4 text-center">
+                            <a href="../">
+                                <img src="assets/images/gelogodark.png" class="mb-4" alt="" width="250">
+                            </a>
+                            <h2 class="mb-1 fw-bold">Let’s get you started!</h2>
+                            <span>Hey there, let’s set up your account.</span>
                         </div>
-                        <div class="card-body bg-white">
-                            <?php
-                                if (isset($_SESSION['error_message'])) {
-                                    ?>
-                                    <div class="alert alert-danger" role="alert">
-                                        <div class="alert-message text-center">
-                                            <?php
-                                            echo $_SESSION['error_message'];
-                                            session_destroy();
-                                            ?>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    unset($_SESSION['error_message']);
-                                }
+                        <?php
+                        if (isset($_SESSION['error_message'])) {
                             ?>
-                            <?php
-                                if (isset($_SESSION['success_message'])) {
-                                    ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <div class="alert-message text-center">
-                                            <?php echo $_SESSION['success_message']; ?>
-                                        </div>
-                                    </div>
+                            <div class="alert alert-danger" role="alert">
+                                <div class="alert-message text-center">
                                     <?php
-                                    unset($_SESSION['success_message']);
-                                }
+                                    echo $_SESSION['error_message'];
+                                    session_destroy();
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+                            unset($_SESSION['error_message']);
+                        }
+                        ?>
+                        <?php
+                        if (isset($_SESSION['success_message'])) {
                             ?>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" name="firstName" placeholder="John">
-                                    <label for="floatingInput">First Name</label>
+                            <div class="alert alert-success" role="alert">
+                                <div class="alert-message text-center">
+                                    <?php echo $_SESSION['success_message']; ?>
                                 </div>
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" name="lastName" placeholder="Doe">
-                                    <label for="floatingInput">Last Name</label>
+                            </div>
+                            <?php
+                            unset($_SESSION['success_message']);
+                        }
+                        ?>
+                        <!-- Form -->
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" autocomplete="off">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" name="firstName" placeholder="John" required>
+                                <label for="name" class="form-label">First Name</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" name="lastName" placeholder="John" required>
+                                <label for="name" class="form-label">Last Name</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="tel" class="form-control" name="phone" placeholder="08162680095" required>
+                                <label for="phone" class="form-label">Phone Number</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="email" id="email" class="form-control" name="email" placeholder="example@gmail.com" required>
+                                <label for="email" class="form-label">Email</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="**************" required>
+                                <label for="password" class="form-label">Password</label>
+                            </div>
+                            <div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-dark" name="register_btn">Sign up</button>
                                 </div>
-                                <div class="form-floating mb-2">
-                                    <input type="email" class="form-control" name="email" placeholder="name@example.com">
-                                    <label for="floatingInput">Email address</label>
-                                </div>
-                                <div class="form-floating mb-2">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
-                                </div>
-                                <div class="d-grid mb-2">
-                                    <button type="submit" name="register_btn" class="btn btn-lg btn-black">Create Account</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer bg-opaque-black inverted text-center">
-                            <p class="text-secondary">Already have an account? <a href="./"
-                                class="underline">Login</a>
-                            </p>
-                        </div>
+                            </div>
+                            <div class="text-center mt-3">Already have an account? <a href="./">Sign in</a></div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <figure class="background background-overlay" style="background-image: url('https://i.imgur.com/ttUNFYO.jpg'); background-attachment: fixed;">
-        </figure>
-    </section>
+    </div>
 
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/index.js"></script>
-
+    <script src="assets/js/theme.min.js"></script>
 </body>
 
 </html>

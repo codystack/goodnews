@@ -1,115 +1,101 @@
 <?php
-include 'components/adminheader.php';
-require_once 'auth/password.php';
+$page = "Security";
+include "./components/header.php";
+require_once "./auth/security-query.php";
 ?>
 
-    <div class="offcanvas-wrap">
+<div class="pt-5 pb-5">
+    <div class="container">
+        <?php include "./components/userinfo.php"; ?>
 
-        <section class="py-8 bg-light">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-lg-8 mx-auto">
-                        <div class="card overflow-hidden bg-primary mb-5">
-                            <div class="card-body inverted level-3">
-                                <div class="row mb-5">
-                                    <div class="col-lg-10">
-                                        <span class="text-white eyebrow mb-1" id="greet"></span>
-                                        <h2>Hello, <?php echo $_SESSION['firstName']; ?>!</h2>
-                                    </div>
+        <div class="row mt-0 mt-md-4">
+            <?php include "./components/navbar.php"; ?>
+            <div class="col-lg-9 col-md-8 col-12">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header">
+                        <h3 class="mb-0">Security</h3>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <?php
+                        if (isset($_SESSION['error_message'])) {
+                            ?>
+                            <div class="alert alert-danger" role="alert">
+                                <div class="alert-message text-center">
+                                    <?php echo $_SESSION['error_message']; ?>
                                 </div>
                             </div>
-                            <img class="position-absolute top-100 start-100 translate-middle"
-                            src="assets/images/svg/pattern.svg" alt="Image">
-                        </div>
+                            <?php
+                            unset($_SESSION['error_message']);
+                        }
+                        ?>
 
-                        <section>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="card bg-opaque-white">
-                                        <div class="card-header">
-                                            <div class="row g-2 g-xl-5 align-items-center">
-                                                <div class="col-md-6">
-                                                    <a href="dashboard" class="btn btn-with-icon btn-dark">
-                                                        <i class="bi bi-arrow-left"></i> Go Back
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-6 text-md-end">
-                                                    <h3 class="fs-6">Password</h3>
+                        <?php
+                        if (isset($_SESSION['success_message'])) {
+                            ?>
+                            <div class="alert alert-success" role="alert">
+                                <div class="alert-message text-center">
+                                    <?php echo $_SESSION['success_message']; ?>
+                                </div>
+                            </div>
+                            <?php
+                            unset($_SESSION['success_message']);
+                        }
+                        ?>
+                        <div>
+                            <h4 class="mb-0">Change Password</h4>
+                            <p>
+                                Login using the new password after successful password change.
+                            </p>
+                            <!-- Form -->
+                            <form class="row" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <!-- Current password -->
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label class="form-label" for="currentpassword">Current password</label>
+                                        <input id="currentpassword" type="password" name="password" class="form-control"
+                                               placeholder="" required />
+                                    </div>
+                                    <div class="row">
+                                        <!-- New password -->
+                                        <div class="mb-3 password-field col-12 col-md-6">
+                                            <label class="form-label" for="newpassword">New password</label>
+                                            <input id="newpassword" type="password" name="newPassword" class="form-control mb-2"
+                                                   placeholder="" required />
+                                            <div class="row align-items-center g-0">
+                                                <div class="col-6">
+													<span data-bs-toggle="tooltip" data-placement="right" title="Test it by typing a password in the field below. To reach full strength, use at least 6 characters, a capital letter and a digit, e.g. 'Test01'">Password strength <i class="fas fa-question-circle ms-1"></i></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body bg-white">
-                                            <?php
-                                                if (isset($_SESSION['error_message'])) {
-                                                    ?>
-                                                    <div class="alert alert-danger" role="alert">
-                                                        <div class="alert-message text-center">
-                                                            <?php
-                                                            echo $_SESSION['error_message'];
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                    unset($_SESSION['error_message']);
-                                                }
-                                            ?>
-                                            <?php
-                                                if (isset($_SESSION['success_message'])) {
-                                                    ?>
-                                                    <div class="alert alert-success" role="alert">
-                                                        <div class="alert-message text-center">
-                                                            <?php echo $_SESSION['success_message']; ?>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                    unset($_SESSION['success_message']);
-                                                }
-                                            ?>
-                                            <form class="row g-2 g-lg-3" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-                                                <div class="col-md-12">
-                                                    <label for="inputCurrentPass" class="form-label">Current Password</label>
-                                                    <input type="password" class="form-control" required id="currentpassword" name="password">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label for="inputNewPass" class="form-label">New Password</label>
-                                                    <input type="password" name="newPassword" required class="form-control" id="newpassword">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label for="inputRepeatNewPass" class="form-label">Repeat New Password</label>
-                                                    <input type="password" class="form-control" required name="confirmpassword" id="confirmpassword">
-                                                </div>
-                                                <div class="d-grid mb-2">
-                                                    <button class="btn btn-dark" name="password_change_btn" type="submit">Change password</button>
-                                                </div>
-
-                                            </form>
+                                        <div class="mb-3 col-12 col-md-6">
+                                            <!-- Confirm new password -->
+                                            <label class="form-label" for="confirmpassword">Confirm New Password</label>
+                                            <input id="confirmpassword" type="password" name="confirmpassword" class="form-control mb-2" placeholder="" required />
+                                            <div class="mt-4"><span id='message'></span></div>
                                         </div>
                                     </div>
+                                    <!-- Button -->
+                                    <button type="submit" name="password_change_btn" class="btn btn-dark">
+                                        Change Password
+                                    </button>
+                                    <div class="col-6"></div>
                                 </div>
-                            </div>
-                        </section>
-
+                                <div class="col-12 mt-4">
+                                    <p class="mb-0">
+                                        Can't remember your current password?
+                                        <a href="password-reset">Reset your password via email</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-
+        </div>
     </div>
+</div>
 
-
-    <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/index.js"></script>
-
-    <!-- Password Matching-->
-    <script>
-        $('#confirmpassword').on('keyup', function () {
-            if ($('#newpassword').val() == $('#confirmpassword').val()) {
-                $('#message').html('Password matched😜').css('color', 'green');
-            } else
-                $('#message').html('Password did not match😡').css('color', 'red');
-        });
-    </script>
-
-</body>
-
-</html>
+<?php include "./components/footer.php"; ?>

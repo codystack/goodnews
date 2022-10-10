@@ -12,7 +12,7 @@ if (isset($_GET['logout'])) {
     header("location: ./");
 }
 
-require_once "./auth/account.php";
+require_once "./auth/picture.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +114,7 @@ require_once "./auth/account.php";
     }
 </style>
 
+
 <body style="background: url('assets/images/dashbg.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
 
     <div class="container d-flex flex-column">
@@ -130,18 +131,17 @@ require_once "./auth/account.php";
                             // output data of each row
                             while($row = mysqli_fetch_assoc($user_result)) {
                                 $id = $row['id'];
-                                $homeAddress = $row['homeAddress'];
                                 $picture = $row['picture'];
                             }
                         }
                     ?>
-                    <div class="card-body p-6 <?php if(isset($homeAddress)){echo 'd-none';}?>">
+                    <div class="card-body p-6 <?php if(isset($picture)){echo 'd-none';}?>">
                         <div class="mb-4 text-center">
                             <!-- <a href="../">
                                 <img src="assets/images/gelogodark.png" class="mb-4" alt="" width="250">
                             </a> -->
-                            <h2 class="mb-1 fw-bold">Complete Registration</h2>
-                            <span>Complete the form below to get your account activated.</span>
+                            <h2 class="mb-1 fw-bold">Upload Photograph</h2>
+                            <span>Picture file format(jpg, png and jpeg) not more than 5MB.</span>
                         </div>
                         <?php
                         if (isset($_SESSION['error_message'])) {
@@ -158,45 +158,15 @@ require_once "./auth/account.php";
                         unset($_SESSION['error_message']);
                         }
                         ?>
-                        <!-- Form -->
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" autocomplete="off">
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" name="homeAddress" placeholder="John" required>
-                                <label for="name" class="form-label">House Address</label>
-                            </div>
-
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" name="flatNumber" placeholder="John" required>
-                                <label for="name" class="form-label">Flat Number</label>
-                            </div>
-
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control" name="nextOfKin" placeholder="John" required>
-                                <label for="name" class="form-label">Name of Next of Kin</label>
-                            </div>
-
-                            <div class="form-floating mb-4">
-                                <input type="tel" class="form-control" name="nextOfKinPhone" placeholder="08162680095" required>
-                                <label for="phone" class="form-label">Next of Kin Phone Number</label>
-                            </div>
-
-                            <div class="form-floating mb-4">
-                                <select class="form-select" name="accountType" aria-label="Floating label select example">
-                                    <option value="Tenant">Tenant</option>
-                                    <option value="Landlord">Landlord</option>
-                                </select>
-                                <label for="floatingSelect">Account Type</label>
-                            </div>
-
-                            <div>
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-dark" name="kyc_btn">Complete Registration</button>
-                                </div>
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="mt-4" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="picture" required>
+                                <button class="btn btn-dark" type="submit" name="picture_btn">Upload</button>
                             </div>
                         </form>
                     </div>
 
-                    <div class="card-body bg-white text-center <?php if(empty($homeAddress)){echo 'd-none';}else{ echo'd-unset';}?>">
+                    <div class="card-body bg-white text-center <?php if(empty($_SESSION['picture'])){echo 'd-none';}else{ echo'd-unset';}?>">
                         <div class="checkmark mt-2">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 161.2 161.2" enable-background="new 0 0 161.2 161.2" xml:space="preserve">
@@ -210,9 +180,9 @@ require_once "./auth/account.php";
                                 <circle class="spin" fill="none" stroke="#0f9372" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12.2175,12.2175" cx="80.6" cy="80.6" r="73.9"/>
                             </svg>
                         </div>
-                        <h5 class="fs-3 mt-2 mb-0">BioData Upload Completed</h5>
-                        <p class="text-dark fw-light fs-3">Hello! <span class="fw-bold"><?php echo $_SESSION['firstName']; ?>,</span> your biodata has been uploaded successfully.</p>
-                        <a href="kyc-photograph" type="button" class="btn btn-lg btn-with-icon btn-dark mb-3">Next</a>
+                        <h5 class="fs-3 mt-2 mb-0">Registration Completed</h5>
+                        <p class="text-dark fw-light fs-3">Hello! <span class="fw-bold"><?php echo $_SESSION['firstName']; ?>,</span> your photograph has been uploaded successfully, <br>your account will be activated within the next 48hrs after due deligence.</p>
+                        <a href="logout" type="button" class="btn btn-lg btn-with-icon btn-dark mb-3">Log Out<i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
