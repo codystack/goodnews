@@ -94,7 +94,7 @@ include "./components/header.php";
                             <div class="row mt-4 mb-3">
                                 <div class="col-md-8 col-lg-6 col-12">
                                     <span class="fs-6">INVOICE FROM</span>
-                                    <h5>Growing Income Store</h5>
+                                    <h5>Goodnews Community Estate</h5>
                                 </div>
 
                                 <div class="col-md-4 col-lg-6 col-12 text-right">

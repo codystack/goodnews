@@ -39,18 +39,22 @@ include "./components/header.php";
                                         
                                         <div class="col-md-6 mx-auto">
                                             <form class="row" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-                                                <!-- First name -->
+                                                
                                                 <div class="mb-3 col-12 col">
                                                     <label class="form-label" for="firstName">Visitor's Name</label>
                                                     <input type="text" name="visitorsName" class="form-control" placeholder="Enter visitors name" />
                                                 </div>
-                                                <!-- Last name -->
+
+                                                <div class="mb-3 col-12 col">
+                                                    <label class="form-label" for="lname">Visit Date</label>
+                                                    <input type="date" name="visitTime" class="form-control" />
+                                                </div>
+
                                                 <div class="mb-3 col-12 col">
                                                     <label class="form-label" for="lname">Visit Time</label>
                                                     <input type="time" name="visitTime" class="form-control" />
                                                 </div>
-                                                <div class="col-12 text-center mt-2 mb-1">
-                                                    <!-- Button -->
+                                                <div class="col-12 text-center mt-2 mb-1 d-grd">
                                                     <button class="btn btn-primary" type="submit" name="update_profile_btn">
                                                         Generate Access Code
                                                     </button>

@@ -39,7 +39,7 @@ if (isset($_GET['logout'])) {
 
     <!-- Style -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <title> GDIS&trade; :: Agent Dashboard</title>
+    <title> Goodnews Estate&trade; :: User Dashboard</title>
 </head>
 
 <body>
