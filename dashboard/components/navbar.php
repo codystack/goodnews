@@ -35,10 +35,6 @@
                         <a class="nav-link" href="transactions"><i class="bi bi-arrow-down-up nav-icon"></i> Transactions</a>
                     </li>
                     
-                    <li class="nav-item <?php if($page=='Vouchers'){echo 'active';}?>">
-                        <a class="nav-link" href="vouchers"><i class="bi bi-receipt nav-icon"></i> Vouchers</a>
-                    </li>
-                    
                     <li class="nav-item <?php if($page=='Support'){echo 'active';}?>">
                         <a class="nav-link" href="support"><i class="bi bi-chat-right-text nav-icon"></i>Support</a>
                     </li>
