@@ -19,16 +19,20 @@
                         <a class="nav-link" href="overview"><i class="bi bi-ui-checks-grid nav-icon"></i> My Dashboard</a>
                     </li>
 
+                    <li class="nav-item <?php if($page=='Access Code'){echo 'active';}?>">
+                        <a class="nav-link" href="access-code"><i class="bi bi-upc-scan nav-icon"></i> Access Code</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#referralModal" href=""><i class="bi bi-key nav-icon"></i> Access Key</a>
+                    </li>
+
                     <li class="nav-item <?php if($page=='Fund Wallet'){echo 'active';}?>">
                         <a class="nav-link" href="wallet"><i class="bi bi-wallet nav-icon"></i> Wallet</a>
                     </li>
                     
                     <li class="nav-item <?php if($page=='Transactions'){echo 'active';}?>">
                         <a class="nav-link" href="transactions"><i class="bi bi-arrow-down-up nav-icon"></i> Transactions</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#referralModal" href=""><i class="bi bi-gift nav-icon"></i> Referral</a>
                     </li>
                     
                     <li class="nav-item <?php if($page=='Vouchers'){echo 'active';}?>">

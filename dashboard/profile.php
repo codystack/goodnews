@@ -22,24 +22,12 @@ require_once "./auth/profile-query.php";
                     </div>
                     <!-- Card body -->
                     <div class="card-body">
-                        <div class="d-lg-flex mb-4 align-items-center justify-content-between">
+                        <div class="mb-4 mx-auto">
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" enctype="multipart/form-data">
-                                <div class="d-lg-flex align-items-center">
-                                    <div class="d-flex align-items-center mb-4 mb-lg-0">
-                                        <img src="./<?php echo $picture; ?>" onClick="triggerClick()" id="profileDisplay" width="400px" Height="200px" class="avatar-xxl rounded-circle"  />
+                                <div class="align-items-center text-center">
+                                    <div class="align-items-center mb-4 mb-lg-0">
+                                        <img src="./<?php echo $picture; ?>" class="avatar-xxl rounded-circle"  />
                                         <input type="file" name="picture" onChange="displayImage(this)" id="picture" class="form-control" style="display: none;">
-                                        <div class="ms-3">
-                                            <div class="d-flex">
-                                                <img src="assets/images/arrow.png" width="50">
-                                                <h4 class="mb-0">Click here to select picture.</h4>
-                                            </div>
-                                            <p class="mb-0">
-                                                PNG or JPG no bigger than 800px wide and tall.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="ms-15">
-                                        <button type="submit" name="profile_picture_btn" class="btn btn-outline-primary btn-sm">Update Profile Picture</button>
                                     </div>
                                 </div>
                             </form>

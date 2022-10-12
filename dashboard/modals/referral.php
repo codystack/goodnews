@@ -10,9 +10,9 @@
       <div class="modal-body">
           <div class="text-center">
                 <img src="./assets/images/svg/giftbox.svg" alt="referral icon" width="160px">
-                <h2 class="mt-5 fw-bold">Refer and Earn</h2>
+                <h2 class="mt-5 fw-bold">Security Key</h2>
                 <p class="mt-3">
-                    You get a ₦1,000 wallet bonus instantly as soon as your friends signup on GDIS using your referral code.
+                    Use your security key for identification.
                 </p>
                 <div class="mb-3 mt-3" id="clipboardAlert"></div>
                 <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 mx-auto mt-4 mb-4">
@@ -21,7 +21,7 @@
                         <button class="btn btn-primary" type="button" onClick="copyToClipboard()" id="clipboardAlertBtn"><i class="fe fe-copy"></i></button>
                     </div>
                 </div>
-                <a href="https://gdisagency.com/terms" class="text-primary" target="_blank"><i class="bi bi-info-circle-fill"></i> Read terms and conditions</a>
+                <a href="https://goodnews.estate/terms" class="text-primary" target="_blank"><i class="bi bi-info-circle-fill"></i> Read terms and conditions</a>
                 
           </div>
       </div>
