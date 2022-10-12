@@ -53,7 +53,7 @@ include "./components/header.php";
                         <div class="d-flex justify-content-between mb-6">
                             <div>
                                 <!-- Img -->
-                                <img src="./assets/images/weblogo.svg" alt="" class="mb-4 avatar-xxl">
+                                <img src="assets/images/gelogodark.png" alt="" class="mb-4" width="200px">
                             </div>
                             <div>
                                 <a href="#" class="print-link no-print"><i class="fe fe-printer"></i></a>
@@ -135,7 +135,7 @@ include "./components/header.php";
 
                         <div class="text-center mt-5">
                             <h4 class="mb-0">Need help? Got questions to ask?</h4>
-                            <span>Contact us our support team via: <a href="mailto:support@gdisagency.com">support@gdisagency.com</a></span>
+                            <span>Contact us our support team via: <a href="mailto:support@gdisagency.com">support@goodnews.estate</a></span>
                         </div>
                         <div class="row mt-4 no-print">
                             <div class="text-center mx-auto">
