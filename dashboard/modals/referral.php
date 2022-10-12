@@ -17,7 +17,7 @@
                 <div class="mb-3 mt-3" id="clipboardAlert"></div>
                 <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 mx-auto mt-4 mb-4">
                     <div class="input-group">
-                        <input type="text" class="form-control text-uppercase" value="<?php echo $securityKey;?>" aria-label="securityKey" id="referralCode" aria-describedby="button-addon2" disabled>
+                        <input type="text" class="form-control text-uppercase" value="<?php echo $_SESSION['securityKey'];?>" aria-label="securityKey" id="referralCode" aria-describedby="button-addon2" disabled>
                         <button class="btn btn-primary" type="button" onClick="copyToClipboard()" id="clipboardAlertBtn"><i class="fe fe-copy"></i></button>
                     </div>
                 </div>

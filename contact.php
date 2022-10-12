@@ -79,7 +79,7 @@
                         </li>
                         <li class="list-group-item d-flex align-items-center">
                         <span class="w-25 text-muted">Phone</span>
-                        +234 705 653 7263
+                        +234 705 653 7279
                         </li>
                     </ul>
                 </div>
