@@ -22,7 +22,7 @@ if (isset($_GET['logout'])) {
     <meta name="description" content="Growing Digital Income Store Agency, Let's help you grow your income " /> 
     <meta name="author" content="ThankGod Okoro"/>
 
-    <link rel="shortcut icon" type="image" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image" href="assets/images/gefavicon.png">
 
     <link href="assets/fonts/feather/feather.css" rel="stylesheet" />
     <link href="assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />

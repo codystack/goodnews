@@ -5,7 +5,7 @@ require_once './auth/userinfo.php';
 <div class="row align-items-center">
     <div class="col-xl-12 col-lg-12 col-md-12 col-12">
         <!-- Bg -->
-        <div class="pt-16 rounded-top-md" style="background: url('assets/images/background/profile-bg.jpg') no-repeat;background-size: cover;"></div>
+        <div class="pt-16 rounded-top-md" style="background: url('assets/images/dashbg.jpg') no-repeat;background-size: cover;"></div>
         <div
             class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom-md shadow-sm">
             <div class="d-flex align-items-center">

@@ -26,7 +26,7 @@ require_once "./auth/profile-query.php";
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" enctype="multipart/form-data">
                                 <div class="d-lg-flex align-items-center">
                                     <div class="d-flex align-items-center mb-4 mb-lg-0">
-                                        <img src="./<?php echo $picture; ?>" onClick="triggerClick()" id="profileDisplay" class="avatar-xxl rounded-circle"  />
+                                        <img src="./<?php echo $picture; ?>" onClick="triggerClick()" id="profileDisplay" width="400px" Height="200px" class="avatar-xxl rounded-circle"  />
                                         <input type="file" name="picture" onChange="displayImage(this)" id="picture" class="form-control" style="display: none;">
                                         <div class="ms-3">
                                             <div class="d-flex">

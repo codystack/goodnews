@@ -11,7 +11,7 @@ include "./modals/withdrawal.php";
             <div class="row align-items-center g-0 border-top py-2">
                 <!-- Desc -->
                 <div class="col-md-12 col-12 text-center">
-                    <span>© <script>document.write(new Date().getFullYear());</script> GDIS&trade; Agency. All Rights Reserved.</span>
+                    <span>© <script>document.write(new Date().getFullYear());</script> Goodnews Estate&trade;. All Rights Reserved.</span>
                 </div>
             </div>
         </div>

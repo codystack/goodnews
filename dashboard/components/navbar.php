@@ -15,21 +15,17 @@
                 <span class="navbar-header">Dashboard</span>
                 <ul class="list-unstyled ms-n2 mb-4">
 
-                    <li class="nav-item <?php if($page=='Dashboard'){echo 'active';}?>">
-                        <a class="nav-link" href="dashboard"><i class="bi bi-ui-checks-grid nav-icon"></i> My Dashboard</a>
+                    <li class="nav-item <?php if($page=='Overview'){echo 'active';}?>">
+                        <a class="nav-link" href="overview"><i class="bi bi-ui-checks-grid nav-icon"></i> My Dashboard</a>
                     </li>
 
                     <li class="nav-item <?php if($page=='Fund Wallet'){echo 'active';}?>">
                         <a class="nav-link" href="wallet"><i class="bi bi-wallet nav-icon"></i> Wallet</a>
                     </li>
-
-                    <li class="nav-item <?php if($page=='Withdrawal'){echo 'active';}?>">
-                    <a class="nav-link" href="withdrawal"><i class="bi bi-cash-stack nav-icon"></i> Withdraw</a>
-                    </li>
                     
-                    <!-- <li class="nav-item <?php if($page=='Transactions'){echo 'active';}?>">
+                    <li class="nav-item <?php if($page=='Transactions'){echo 'active';}?>">
                         <a class="nav-link" href="transactions"><i class="bi bi-arrow-down-up nav-icon"></i> Transactions</a>
-                    </li> -->
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#referralModal" href=""><i class="bi bi-gift nav-icon"></i> Referral</a>
@@ -50,11 +46,6 @@
                     <li class="nav-item <?php if($page=='Profile'){echo 'active';}?>">
                         <a class="nav-link" href="profile"><i class="bi bi-person nav-icon"></i>Profile</a>
                     </li>
-
-                    <li class="nav-item <?php if($page=='Bank'){echo 'active';}?>">
-                        <a class="nav-link" href="bank"><i class="bi bi-credit-card-2-front nav-icon"></i>Bank Details</a>
-                    </li>
-                    
                     <li class="nav-item <?php if($page=='Security'){echo 'active';}?>">
                         <a class="nav-link" href="security"><i class="bi bi-lock nav-icon"></i>Security</a>
                     </li>

@@ -1,5 +1,5 @@
 <?php
-$page = "Dashboard";
+$page = "Overview";
 include "./config/db.php";
 include "./components/header.php";
 ?>

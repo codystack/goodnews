@@ -3,7 +3,7 @@ paymentForm.addEventListener("submit", payWithPaystack, false);
 function payWithPaystack(e) {
   e.preventDefault();
   let handler = PaystackPop.setup({
-    key: 'pk_test_a057bfb00c4aa81dd4af274b8c5e895ef7faff85', // Replace with your public key
+    key: 'pk_test_772b826deec948f156ddd65a7b326f1402ce9030', // Replace with your public key
     email: document.getElementById('email-address').value,
     firstname: document.getElementById('first-name').value,
     lastname: document.getElementById('last-name').value,
@@ -17,7 +17,7 @@ function payWithPaystack(e) {
     callback: function(response){
       let message = 'Payment complete! Reference: ' + response.reference;
       alert(message);
-      window.location = "http://localhost/gdisagent/verify_transaction?reference=" + response.reference;
+      window.location = "http://localhost/goodnews/verify_transaction?reference=" + response.reference;
     }
   });
   handler.openIframe();

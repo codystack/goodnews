@@ -81,6 +81,10 @@ if (isset($_POST['login_btn'])) {
         $_SESSION['homeAddress'] = $homeAddress;
         $_SESSION['id'] = $id;
         $_SESSION['securityKey'] = $securityKey;
+        if ($verified == 1){
+            $_SESSION['success_message'] = "Login Successfull";
+            header('location: overview');
+        }
         if ($verified == 0){
             $_SESSION['success_message'] = "Login Successfull";
             header('location: kyc');
@@ -89,8 +93,6 @@ if (isset($_POST['login_btn'])) {
         $_SESSION['error_message'] = "Account Deactivated";
         echo "<meta http-equiv='refresh' content='5; URL=./'>";
     }elseif ($status == 'Active') {
-        header('location: dashboard');
-    }elseif ($verified == 1) {
         header('location: dashboard');
     }else {
         $_SESSION['error_message'] = "Incorrect Login Details";

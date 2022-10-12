@@ -18,7 +18,7 @@ include "./components/header.php";
 						<div class="p-4 d-flex justify-content-between align-items-center">
 							<div>
 								<h3 class="mb-0">Fund Wallet</h3>
-								<span>Fund your wallet to enable you buy and sell vouchers.</span>
+								<span>Fund your wallet to enable you pay your service charge and utility bills.</span>
 							</div>
 							<!-- Nav -->
                             <div class="nav btn-group flex-nowrap" role="tablist">
