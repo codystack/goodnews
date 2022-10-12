@@ -68,14 +68,15 @@
                     <span class="icon-shape icon-lg bg-light-danger me-2 text-dark-danger rounded-3">
                         <i class="bi bi-receipt"></i>
                     </span>
+                    <h2 class="h3 fw-bold mb-0 mt-3 lh-1">0</h2>
                     <?php
-                    $id = $_SESSION['id'];
-                    $countVouchers = mysqli_query($conn, "SELECT users.id, vouchers.id, vouchers.userID FROM vouchers INNER JOIN users ON vouchers.userID=users.id WHERE users.id = '$id'");
+                    // $id = $_SESSION['id'];
+                    // $countVouchers = mysqli_query($conn, "SELECT users.id, vouchers.id, vouchers.userID FROM vouchers INNER JOIN users ON vouchers.userID=users.id WHERE users.id = '$id'");
 
-                    echo "<h2 class=\"h3 fw-bold mb-0 mt-3 lh-1\">" .number_format(mysqli_num_rows($countVouchers), 0, '.', ','). "</h2>";
+                    // echo "<h2 class=\"h3 fw-bold mb-0 mt-3 lh-1\">" .number_format(mysqli_num_rows($countVouchers), 0, '.', ','). "</h2>";
                     ?>
                 </div>
-                <p>Total Voucher</p>
+                <p>Total Users</p>
                 <div class="progress bg-light-danger" style="height: 2px">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
