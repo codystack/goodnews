@@ -213,7 +213,7 @@ include "./modals/withdrawal.php";
 
         if (alertTrigger) {
             alertTrigger.addEventListener('click', function () {
-                alert('Referral code copied to clipboard', 'success');
+                alert('Security Key copied to clipboard', 'success');
             });
         }
     </script>

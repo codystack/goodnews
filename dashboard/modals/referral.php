@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
           <div class="text-center">
-                <img src="./assets/images/svg/giftbox.svg" alt="referral icon" width="160px">
+                <img src="./assets/images/png/password.png" alt="referral icon" width="160px">
                 <h2 class="mt-5 fw-bold">Security Key</h2>
                 <p class="mt-3">
                     Use your security key for identification.
@@ -17,7 +17,7 @@
                 <div class="mb-3 mt-3" id="clipboardAlert"></div>
                 <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 mx-auto mt-4 mb-4">
                     <div class="input-group">
-                        <input type="text" class="form-control text-uppercase" value="<?php echo $agentID;?>" aria-label="agentID" id="referralCode" aria-describedby="button-addon2" disabled>
+                        <input type="text" class="form-control text-uppercase" value="<?php echo $securityKey;?>" aria-label="securityKey" id="referralCode" aria-describedby="button-addon2" disabled>
                         <button class="btn btn-primary" type="button" onClick="copyToClipboard()" id="clipboardAlertBtn"><i class="fe fe-copy"></i></button>
                     </div>
                 </div>
