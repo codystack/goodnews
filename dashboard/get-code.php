@@ -1,6 +1,7 @@
 <?php
-$page = "Fund Wallet";
+$page = "Access Code";
 include "./components/header.php";
+require_once "./auth/access-code-query.php";
 ?>
 
 
@@ -36,26 +37,59 @@ include "./components/header.php";
                                             <h2 class="mb-0">Generate Access Code</h2>
                                             <p>Give visitors hazzle free access.</p>
                                         </div>
-                                        
+                                        <?php
+                                        if (isset($_SESSION['error_message'])) {
+                                            ?>
+                                            <div class="alert alert-danger" role="alert">
+                                                <div class="alert-message text-center">
+                                                    <?php
+                                                    echo $_SESSION['error_message'];
+                                                    session_destroy();
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            unset($_SESSION['error_message']);
+                                        }
+                                        ?>
+                                        <?php
+                                        if (isset($_SESSION['success_message'])) {
+                                            ?>
+                                            <div class="alert alert-success" role="alert">
+                                                <div class="alert-message text-center">
+                                                    <?php echo $_SESSION['success_message']; ?>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            unset($_SESSION['success_message']);
+                                        }
+                                        ?>
                                         <div class="col-md-6 mx-auto">
                                             <form class="row" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-                                                
-                                                <div class="mb-3 col-12 col">
-                                                    <label class="form-label" for="firstName">Visitor's Name</label>
-                                                    <input type="text" name="visitorsName" class="form-control" placeholder="Enter visitors name" />
+                                                <div class="mb-3 col-12 col" style="display: none;">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="inputstaffID">User ID</label>
+                                                        <input type="text" name="userID" class="form-control" value="<?php echo $_SESSION['id']; ?>" readonly />
+                                                    </div>
                                                 </div>
 
                                                 <div class="mb-3 col-12 col">
-                                                    <label class="form-label" for="lname">Visit Date</label>
-                                                    <input type="date" name="visitTime" class="form-control" />
+                                                    <label class="form-label" for="visitorsName">Visitor's Name</label>
+                                                    <input type="text" name="visitorsName" class="form-control" required placeholder="Visitor's First Name & Last Name" />
                                                 </div>
 
                                                 <div class="mb-3 col-12 col">
-                                                    <label class="form-label" for="lname">Visit Time</label>
-                                                    <input type="time" name="visitTime" class="form-control" />
+                                                    <label class="form-label" for="visitDate">Visit Date</label>
+                                                    <input type="date" name="visitDate" required class="form-control" />
                                                 </div>
-                                                <div class="col-12 text-center mt-2 mb-1 d-grd">
-                                                    <button class="btn btn-primary" type="submit" name="update_profile_btn">
+
+                                                <div class="mb-3 col-12 col">
+                                                    <label class="form-label" for="visitTime">Visit Time</label>
+                                                    <input type="time" name="visitTime" required class="form-control" />
+                                                </div>
+
+                                                <div class="col-12 text-center mt-2 mb-1 d-grid">
+                                                    <button class="btn btn-primary" type="submit" name="access_code_btn">
                                                         Generate Access Code
                                                     </button>
                                                 </div>

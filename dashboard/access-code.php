@@ -18,7 +18,7 @@ include "./components/header.php";
 						<div class="p-4 d-flex justify-content-between align-items-center">
 							<div>
 								<h3 class="mb-0">Access Code</h3>
-								<span>Generate access code for easy access.</span>
+								<!-- <span>Generate access code for easy access.</span> -->
 							</div>
 							<!-- Nav -->
                             <div class="nav btn-group flex-nowrap" role="tablist">
@@ -43,42 +43,43 @@ include "./components/header.php";
                                 <!-- Table body -->
                                 <tbody>
                                 <?php
-                                $topup_id = 1;
-                                $select_query = "SELECT * FROM transactions WHERE userEmail='".$_SESSION['email']."' ORDER BY transactionDate DESC";
+                                $access_id = 1;
+                                $select_query = "SELECT * FROM accessCode WHERE userID='".$_SESSION['id']."' ORDER BY requestDate DESC";
                                 $result = mysqli_query($conn, $select_query);
                                 if (mysqli_num_rows($result) > 0) {
                                     // output data of each row
                                     while($row = mysqli_fetch_assoc($result)) {
                                         $id = $row['id'];
-                                        $invoiceID = $row['invoiceID'];
-                                        $transactionRef = $row['transactionRef'];
+                                        $code = $row['code'];
                                         $paymentMethod = $row['paymentMethod'];
-                                        $transactionDate = $row['transactionDate'];
-                                        $date = strtotime($transactionDate);
+                                        $requestDate = $row['requestDate'];
+                                        $date = strtotime($requestDate);
                                         $status = $row['status'];
                                         switch ($status) {
-                                            case "failed";
+                                            case 0;
                                                 $class  = 'bg-warning';
                                                 $text = 'text-warning';
+                                                $statusMessage = 'Pending';
                                                 break;
-                                            case "success";
+                                            case 1;
                                                 $class  = 'bg-success';
                                                 $text = 'text-success';
+                                                $statusMessage = 'Access Granted';
                                                 break;
                                             default:
                                                 $class  = '';
                                         }
 
                                         echo "<tr>";
-                                        echo "<td class=\"align-middle border-top-0\">" .$topup_id. "</td>";
-                                        echo "<td class=\"align-middle border-top-0\">" .$invoiceID. "</td>";
+                                        echo "<td class=\"align-middle border-top-0\">" .$access_id. "</td>";
+                                        echo "<td class=\"align-middle border-top-0\">" .$code. "</td>";
                                         echo "<td class=\"align-middle border-top-0\">" .date('j F Y', $date). "</td>";
-                                        echo "<td class=\"align-middle border-top-0\">" ."<span class='badge badge-dot $class'></span><span class='$text text-capitalize'> $status </span>". "</td>";
+                                        echo "<td class=\"align-middle border-top-0\">" ."<span class='badge badge-dot $class'></span><span class='$text text-capitalize'> $statusMessage </span>". "</td>";
                                         echo "<td class=\"text-muted align-middle text-end border-top-0\">"
                                             ."<a href=\"view-transaction?id=$id\" class='btn btn-dark btn-sm'><i class=\"fe fe-eye \"></i></a>".
                                         "</td>";
                                     "</tr>";
-                                    $topup_id++;
+                                    $access_id++;
                                     }
                                 }else {
                                     echo "<td><p>No Access Code Yet!</p></td>";

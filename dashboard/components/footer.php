@@ -218,10 +218,36 @@ include "./modals/withdrawal.php";
         }
     </script>
     <script>
+        function copyCodeToClipboard() {
+            var copyText = document.getElementById("accessCode").value;
+            navigator.clipboard.writeText(copyText).then(() => {
+            });
+        }
+
+        var alertPlaceholder = document.getElementById('clipboardCodeAlert')
+        var alertTrigger = document.getElementById('clipboardCodeBtn')
+
+        function alert(message, type) {
+        var wrapper = document.createElement('div')
+        wrapper.innerHTML = '<div class="text-center alert alert-' + type +'" role="alert">' + message + '</div>'
+
+        alertPlaceholder.append(wrapper)
+        }
+
+        if (alertTrigger) {
+            alertTrigger.addEventListener('click', function () {
+                alert('Access Code copied to clipboard.', 'success');
+            });
+        }
+    </script>
+
+    <!-- History function -->
+    <script>
         function goBack() {
             window.history.back()
         }
     </script>
+
     <script>
         $(document).ready( function () {
             $('#allTransactions').DataTable();
